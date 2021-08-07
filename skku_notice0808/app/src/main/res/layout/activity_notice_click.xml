@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NoticeClickActivity">
+
+    <TextView
+        android:id="@+id/NoticeTitle"
+        android:textColor="@color/black"
+        android:background="#CBEF9A"
+        android:gravity="center"
+        android:textSize="32sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="제목이 위치할 곳"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:textColor="@color/black"
+        android:background="#D1F3D2"
+        android:id="@+id/NoticeContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textRelatedNotice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NoticeTitle"
+        app:layout_constraintVertical_bias="0.075" />
+
+    <TextView
+        android:id="@+id/textRelatedNotice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="관련 공지사항"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="281dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="409dp"
+        android:layout_height="429dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="301dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
