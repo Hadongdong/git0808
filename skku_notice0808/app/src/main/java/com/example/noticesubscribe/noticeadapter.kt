@@ -1,17 +1,12 @@
 package com.example.noticesubscribe
 
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import android.os.Bundle
-import android.text.Layout
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -49,16 +44,21 @@ class NoticeAdapter( val parentContext: Context,val noticeList: ArrayList<Notice
 //            startActivity(parentContext, intent, null)
 
             // 공지사항을 누르면 NoticeClickActivity 실행함
-            val intent = Intent(parentContext, NoticeClickActivity::class.java)
+            val intent = Intent(parentContext, NoticeClickActivity::class.java).apply {
+                putExtra("title", holder.title.text.toString())
+//            putExtra("date", holder.date.text)
+//            putExtra("visited", holder.visited.text)
+//            putExtra("link", holder.link.text)
+                //나중에 같은 방법으로 내용까지 넣을 때 이 주석을 사용하면 된다
+                //putExtra("content", holder.content.text)
+            }
             //intent에 전달할 정보를 더 넣어서 새로운 엑티비티에 건내준다 -창
-            intent.putExtra("title", holder.title.text.toString())
-//            intent.putExtra("date", holder.date.text)
-//            intent.putExtra("visited", holder.visited.text)
-//            intent.putExtra("link", holder.link.text)
-            //나중에 같은 방법으로 내용까지 넣을 때 이 주석을 사용하면 된다
-            //intent.putExtra("content", holder.content.text)
-
-
+//            if (holder.title.text.toString() != null){
+//                Log.d("notnull", "${holder.title.text.toString()}")
+//            } else{
+//                Log.d("notnull", "눌이다")
+//
+//            }
             startActivity(parentContext, intent, null)
         }
 
