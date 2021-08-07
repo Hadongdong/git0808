@@ -47,7 +47,18 @@ class NoticeAdapter( val parentContext: Context,val noticeList: ArrayList<Notice
 //            Log.d("noticeadapter", "여기에서의 명령을 실행한거")
 //            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.skku.edu/skku/campus/skk_comm/notice01.do"+holder.link.text.toString()))
 //            startActivity(parentContext, intent, null)
+
+            // 공지사항을 누르면 NoticeClickActivity 실행함
             val intent = Intent(parentContext, NoticeClickActivity::class.java)
+            //intent에 전달할 정보를 더 넣어서 새로운 엑티비티에 건내준다 -창
+            intent.putExtra("title", holder.title.text.toString())
+//            intent.putExtra("date", holder.date.text)
+//            intent.putExtra("visited", holder.visited.text)
+//            intent.putExtra("link", holder.link.text)
+            //나중에 같은 방법으로 내용까지 넣을 때 이 주석을 사용하면 된다
+            //intent.putExtra("content", holder.content.text)
+
+
             startActivity(parentContext, intent, null)
         }
 
