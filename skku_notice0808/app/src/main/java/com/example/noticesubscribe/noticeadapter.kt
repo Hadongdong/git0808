@@ -1,10 +1,12 @@
 package com.example.noticesubscribe
 
+import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Layout
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +43,11 @@ class NoticeAdapter( val parentContext: Context,val noticeList: ArrayList<Notice
         holder.link.text = noticeList.get(position).link
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.skku.edu/skku/campus/skk_comm/notice01.do"+holder.link.text.toString()))
+//            여기 아래 3줄은 크롬으로 바로 창을 여는 코드이다
+//            Log.d("noticeadapter", "여기에서의 명령을 실행한거")
+//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.skku.edu/skku/campus/skk_comm/notice01.do"+holder.link.text.toString()))
+//            startActivity(parentContext, intent, null)
+            val intent = Intent(parentContext, NoticeClickActivity::class.java)
             startActivity(parentContext, intent, null)
         }
 

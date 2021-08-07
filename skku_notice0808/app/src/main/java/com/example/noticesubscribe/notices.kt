@@ -16,4 +16,5 @@ data class Notice(
     @ColumnInfo(name="date") var date: String = "",
     @ColumnInfo(name="visited") var visited: String = "",
     @ColumnInfo(name="link") var link: String = ""
+
 )
