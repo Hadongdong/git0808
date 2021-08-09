@@ -36,7 +36,7 @@ class NoticeAdapter( val parentContext: Context,val noticeList: ArrayList<Notice
         holder.date.text = noticeList.get(position).date
         holder.visited.text = noticeList.get(position).visited
         holder.link.text = noticeList.get(position).link
-
+        holder.Ncontent.text = noticeList.get(position).Ncontent
         holder.itemView.setOnClickListener {
 //            여기 아래 3줄은 크롬으로 바로 창을 여는 코드이다
 //            Log.d("noticeadapter", "여기에서의 명령을 실행한거")
@@ -50,15 +50,15 @@ class NoticeAdapter( val parentContext: Context,val noticeList: ArrayList<Notice
 //            putExtra("visited", holder.visited.text)
 //            putExtra("link", holder.link.text)
                 //나중에 같은 방법으로 내용까지 넣을 때 이 주석을 사용하면 된다
-                //putExtra("content", holder.content.text)
+                putExtra("Ncontent", holder.Ncontent.text.toString())
             }
             //intent에 전달할 정보를 더 넣어서 새로운 엑티비티에 건내준다 -창
-//            if (holder.title.text.toString() != null){
-//                Log.d("notnull", "${holder.title.text.toString()}")
-//            } else{
-//                Log.d("notnull", "눌이다")
-//
-//            }
+            if (holder.Ncontent.text.toString() != null){
+                Log.d("notnull", "${holder.Ncontent.text.toString()}")
+            } else{
+                Log.d("notnull", "눌이다")
+
+            }
             startActivity(parentContext, intent, null)
         }
 
@@ -84,7 +84,7 @@ class NoticeAdapter( val parentContext: Context,val noticeList: ArrayList<Notice
         val visited = itemView.findViewById<TextView>(R.id.visitedView) // 조회수
         val link = itemView.findViewById<TextView>(R.id.linkView) // 링크
         val scrap = itemView.findViewById<Button>(R.id.bt_keep_button)
-
+        val Ncontent = itemView.findViewById<TextView>(R.id.Ncontent)
     }
 
 

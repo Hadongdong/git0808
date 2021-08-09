@@ -33,7 +33,9 @@ class NoticeClickActivity : AppCompatActivity() {
 //
 //        }
         var titleOfaNotice = intent?.getStringExtra("title")
+        var contentOfaNotice = intent?.getStringExtra("Ncontent")
         binding.NoticeTitle.text = titleOfaNotice
+        binding.NoticeContent.text = contentOfaNotice
         //차후에 내용 받아오면 이거 지우면 된다
         //binding.NoticeContent = contentOfaNotice
 
