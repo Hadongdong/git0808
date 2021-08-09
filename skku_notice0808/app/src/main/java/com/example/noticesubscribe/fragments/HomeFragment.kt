@@ -15,6 +15,7 @@ import android.util.Log
 import android.widget.*
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.noticesubscribe.*
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
@@ -29,6 +30,7 @@ class HomeFragment : Fragment() {
     val keyList = arrayListOf<Keyword>()//첫번째 리스트 아이템 배열(구독키워드)
     val keyadapter = KeyWordAdapter(keyList)//첫번째 리사이클러뷰 어댑터 부르기(구독키워드)
     val delete_btn = view?.findViewById< ImageView>(R.id.btn_delete2)
+    var mDocuments: List<DocumentSnapshot>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +49,28 @@ class HomeFragment : Fragment() {
         mBinding = null
         super.onDestroyView()
     }
-
+    fun KeyWordAdapter.getDataFromFirestore() {
+        db.collection("Contacts")
+            .orderBy("timestamp", Query.Direction.DESCENDING)
+            .addSnapshotListener{ snapshot, exception ->
+                if (exception != null) {
+                }
+                else {
+                    if (snapshot != null) {
+                        if (!snapshot.isEmpty) {
+                            keyList.clear()
+                            mDocuments = snapshot.documents
+                            val documents = snapshot.documents
+                            for (document in documents) {
+                                val item = Keyword(document["key"] as String)
+                                keyList.add(item)
+                            }
+                            notifyDataSetChanged()
+                        }
+                    }
+                }
+            }
+    }
     //검색 내용에 해당하는 공지들이 표시될 recyclerlist 넣기
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,7 +79,14 @@ class HomeFragment : Fragment() {
             val intent = Intent(getActivity(), KeywordEditActivity::class.java)
             startActivity(intent)
         }
-        delete_btn?.setVisibility(View.INVISIBLE)
+        (mBinding?.rvKeyword?.adapter as KeyWordAdapter)?.getDataFromFirestore()
+        keyadapter.itemClick = object : KeyWordAdapter.ItemClick {
+            override fun onClick(view: View, pos: Int) {
+                when(view.id){
+                    R.id.btn_delete2->itemDelete(mDocuments!!.get(pos))
+                }
+            }
+        }
        // delete_btn?.setVisibility(View.GONE);
 
 //        delete_btn?.setOnClickListener{
@@ -136,5 +166,9 @@ class HomeFragment : Fragment() {
                 // 실패할 경우
                 Log.w("MainActivity", "Error getting documents: $exception")
             }
-}
+}    fun itemDelete(doc: DocumentSnapshot){
+        db.collection("Contacts").document(doc.id)
+            .delete()
+
+    }
 }

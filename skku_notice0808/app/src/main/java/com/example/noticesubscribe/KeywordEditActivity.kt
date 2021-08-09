@@ -131,6 +131,7 @@ class KeywordEditActivity : AppCompatActivity() {
                 }
             }
         }
+        //키워드 추가 검색창에 작성된 내용 삭제
         (mainbinding?.rvKeyword?.adapter as KeyWordAdapter).getDataFromFirestore()
         mainbinding?.removeBtn?.setOnClickListener{
             val input = mainbinding?.keywordinput
